@@ -3,6 +3,9 @@ from random import randint
 from datetime import datetime, timedelta
 
 def closest_pair(input_points):
+    if _input_size_too_small_(input_points):
+        return _result_for_small_input(input_points)
+
     x_sorted_points = sorted(input_points, key=lambda point: point[0])
     y_sorted_points = sorted(input_points, key=lambda point: point[1])
     x_sorted_length = len(x_sorted_points)
@@ -21,8 +24,21 @@ def closest_pair(input_points):
         y_sorted_points,
         closest_pair_from_halves[2],
     )
+
     print("LEFT: {}\nRIGHT: {}\nSPLIT: {}".format(left_closest_pair, right_closest_pair, closest_split_pair))
     return min(left_closest_pair, right_closest_pair, closest_split_pair, key=lambda pair_data: pair_data[2])
+
+def _input_size_too_small_(input_points):
+    return len(input_points) < 4
+
+def _result_for_small_input(input_points):
+    length = len(input_points)
+    if length <= 1:
+        return
+    elif length == 2:
+        return (input_points[0], input_points[1], _distance_between(input_points[0],  input_points[1]))
+    elif length == 3:
+        return _brute_force_closest_pair(input_points)
 
 def _calculate_closest_split_pair(x_sorted, y_sorted, delta):
     mid_x = x_sorted[len(x_sorted)/2][0]
