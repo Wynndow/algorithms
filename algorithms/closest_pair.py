@@ -84,7 +84,12 @@ def _distance_between(point_1, point_2):
 
 if __name__ == '__main__':
     random.seed(100)
-    input_points = [(x, y) for x, y in zip((randint(0, 50) for x in range(1000)), (randint(0, 50) for y in range(1000)))]
+    input_points = [
+        (x, y) for x, y in zip(
+            (randint(0, 50) for x in range(1000)),
+            (randint(0, 50) for y in range(1000))
+        )
+    ]
 
     # t_start = datetime.now()
     print(closest_pair(list(set(input_points))))
