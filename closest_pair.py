@@ -1,4 +1,6 @@
+import random
 from random import randint
+from datetime import datetime, timedelta
 
 def closest_pair(input_points):
     x_sorted_input_points = sorted(input_points, key=lambda point: point[0])
@@ -29,7 +31,6 @@ def calculate_split_closest(x_sorted, y_sorted, delta):
     interesting_points = [point for point in y_sorted if point[0] >= middle_x - delta and point[0] <= middle_x + delta]
     smallest_distance = delta
     closest_pair = (None, None, float("inf"))
-    print(interesting_points)
     for i in range(0, len(interesting_points)-1):
         for jay in range(1, min(7, len(interesting_points)-i)):
             point_1 = interesting_points[i]
@@ -69,6 +70,13 @@ def brute_force_closest_pair(input_points):
                 closest_pair = (input_points[i], input_points[j], distance)
     return closest_pair
 
-input_points = [(x, y) for x, y in zip([randint(0, 10) for x in range(10)], [randint(0, 10) for y in range(10)])]
+random.seed(100)
+input_points = [(x, y) for x, y in zip([randint(0, 1000) for x in range(10000)], [randint(0, 1000) for y in range(10000)])]
 # print(recurse_to_smallest_pair(list(set(input_points))))
+
+t_start = datetime.now()
 print(closest_pair(list(set(input_points))))
+t_finish = datetime.now()
+
+taken = t_finish - t_start
+print(taken)
