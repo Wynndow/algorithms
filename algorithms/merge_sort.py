@@ -3,11 +3,11 @@ from random import randint
 def merge_sort(input):
     if len(input) <= 1:
         return input
-    left = input[:len(input)/2]
-    right = input[len(input)/2:]
-    return merge(merge_sort(left), merge_sort(right))
+    left = input[:len(input)//2]
+    right = input[len(input)//2:]
+    return _merge(merge_sort(left), merge_sort(right))
 
-def merge(left, right):
+def _merge(left, right):
     output = []
     while left or right:
         if left and right:
@@ -21,7 +21,8 @@ def merge(left, right):
             output.append(right.pop(0))
     return output
 
-numbers = [randint(0, 100000) for x in range(100000)]
-# numbers = [0.3, 0.5, 0.7, 0.1, 0.3, 0.2, 0.6, 0.1, 0.9]
-# print numbers
-print(merge_sort(numbers))
+if __name__ == '__main__':
+    numbers = [randint(0, 1000) for x in range(1000)]
+    # numbers = [0.3, 0.5, 0.7, 0.1, 0.3, 0.2, 0.6, 0.1, 0.9]
+    # print numbers
+    print(merge_sort(numbers))
