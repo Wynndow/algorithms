@@ -71,14 +71,15 @@ def _brute_force_closest_pair(input_points):
 
 def _distance_between(point_1, point_2):
     return ((point_2[0] - point_1[0]) ** 2 + (point_2[1] - point_1[1]) ** 2) ** 0.5
-# 
-#
-# random.seed(100)
-# input_points = [(x, y) for x, y in zip((randint(0, 1000) for x in range(100000000)), (randint(0, 1000) for y in range(100000000)))]
-#
-# t_start = datetime.now()
-# print(closest_pair(list(set(input_points))))
-# t_finish = datetime.now()
-#
-# taken = t_finish - t_start
-# print(taken)
+
+if __name__ == '__main__':
+
+    # random.seed(100)
+    input_points = [(x, y) for x, y in zip((randint(0, 50) for x in range(6)), (randint(0, 50) for y in range(6)))]
+    print(input_points)
+    t_start = datetime.now()
+    print(closest_pair(list(set(input_points))))
+    t_finish = datetime.now()
+
+    taken = t_finish - t_start
+    print(taken)
