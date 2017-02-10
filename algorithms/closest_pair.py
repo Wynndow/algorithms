@@ -35,15 +35,12 @@ def _recurse_to_answer(x_sorted_points, y_sorted_points):
     return min(left_closest_pair, right_closest_pair, closest_split_pair, key=lambda pair_data: pair_data[2])
 
 def _input_size_too_small_(input_points):
-    return len(input_points) < 4
+    return len(input_points) <= 3
 
 def _result_for_small_input(input_points):
-    length = len(input_points)
-    if length <= 1:
+    if len(input_points) <= 1:
         return
-    elif length == 2:
-        return (input_points[0], input_points[1], _distance_between(input_points[0],  input_points[1]))
-    elif length == 3:
+    else:
         return _brute_force_closest_pair(input_points)
 
 def _calculate_closest_split_pair(x_sorted, y_sorted, delta):
