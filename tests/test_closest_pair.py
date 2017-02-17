@@ -63,3 +63,12 @@ class TestClosestPair():
         assert closest_pair_result[0] == (2, 3)
         assert closest_pair_result[1] == (3, 4)
         assert closest_pair_result[2] == 1.4142135623730951
+
+    def test_closest_pair_in_one_half_and_split_on_recursive_call(self):
+        input_points = [(0, 2),(2, 2),(3, 2),(5, 2),(7, 2),(9, 2),(11, 2),(14, 2)]
+
+        closest_pair_result = closest_pair(input_points)
+
+        assert closest_pair_result[0] == (2, 2)
+        assert closest_pair_result[1] == (3, 2)
+        assert closest_pair_result[2] == 1
