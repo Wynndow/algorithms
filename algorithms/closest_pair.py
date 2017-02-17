@@ -10,10 +10,10 @@ def closest_pair(input_points):
     y_sorted_points = sorted(input_points, key=lambda point: point[1])
     x_sorted_length = len(x_sorted_points)
 
-    left_closest_pair = _recurse_to_closest_pair(
+    left_closest_pair = closest_pair(
         x_sorted_points[:x_sorted_length/2]
     )
-    right_closest_pair = _recurse_to_closest_pair(
+    right_closest_pair = closest_pair(
         x_sorted_points[x_sorted_length/2:]
     )
 
@@ -25,7 +25,6 @@ def closest_pair(input_points):
         closest_pair_from_halves[2],
     )
 
-    print("LEFT: {}\nRIGHT: {}\nSPLIT: {}".format(left_closest_pair, right_closest_pair, closest_split_pair))
     return min(left_closest_pair, right_closest_pair, closest_split_pair, key=lambda pair_data: pair_data[2])
 
 def _input_size_too_small_(input_points):
@@ -59,22 +58,6 @@ def _calculate_closest_split_pair(x_sorted, y_sorted, delta):
                 closest_pair = [potential_closest_split_pairs[i], potential_closest_split_pairs[i + j], distance]
     return closest_pair
 
-def _recurse_to_closest_pair(x_sorted_points):
-    if len(x_sorted_points) <= 3:
-        return _brute_force_closest_pair(x_sorted_points)
-
-    left_closest = _recurse_to_closest_pair(
-        x_sorted_points[:len(x_sorted_points)/2]
-    )
-    right_closest = _recurse_to_closest_pair(
-        x_sorted_points[len(x_sorted_points)/2:]
-    )
-
-    if left_closest[2] < right_closest[2]:
-        return left_closest
-    else:
-        return right_closest
-
 def _brute_force_closest_pair(input_points):
     smallest_distance = float("inf")
     closest_pair = None
@@ -91,8 +74,9 @@ def _distance_between(point_1, point_2):
 if __name__ == '__main__':
 
     # random.seed(100)
-    input_points = [(x, y) for x, y in zip((randint(0, 50) for x in range(6)), (randint(0, 50) for y in range(6)))]
-    print(input_points)
+    input_points = [(x, y) for x, y in zip((randint(0, 100000) for x in range(100000)), (randint(0, 100000) for y in range(100000)))]
+    # input_points = [(0,2),(2,2),(3,2),(5,2),(7,2),(9,2),(11,2),(14,2)]
+    # print(input_points)
     t_start = datetime.now()
     print(closest_pair(list(set(input_points))))
     t_finish = datetime.now()
